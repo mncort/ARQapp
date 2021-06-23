@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "watchsass": "sass --watch assets/scss:assets/css"
+  },
+  "author": "nanuc",
+  "license": "ISC",
+  "description": ""
+}
