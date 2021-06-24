@@ -38,7 +38,7 @@ class Presupuesto{
     }
 
     calcularTotal(){
-        this.total = this.tareas.reduce((subtotal,tarea) => tarea.cantidad * tarea.precio + subtotal, 0)
+        this.total = this.tareas.reduce((subtotal,tarea) => tarea.cantidad * tarea.precio + subtotal, 0);
     }
 
 }
@@ -80,5 +80,5 @@ alert(presupuesto.tareas.map(tarea =>
     `${tarea.id}  -  ${tarea.nombre}  subtotal: ${tarea.cantidad * tarea.precio}`
     ).join("\n")
     + `\n\nTotal: ${presupuesto.total}`
-    )
+    );
 
