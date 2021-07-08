@@ -1,11 +1,11 @@
 {
-  "name": "test",
+  "name": "arqapp",
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
     "watchsass": "sass --watch assets/scss:assets/css"
   },
-  "author": "nanuc",
+  "author": "",
   "license": "ISC",
   "description": ""
 }
