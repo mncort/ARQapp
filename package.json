@@ -7,5 +7,16 @@
   },
   "author": "",
   "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mncort/ARQapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mncort/ARQapp/issues"
+  },
+  "homepage": "https://github.com/mncort/ARQapp#readme",
   "description": ""
 }

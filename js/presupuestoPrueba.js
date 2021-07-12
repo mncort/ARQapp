@@ -1,0 +1,68 @@
+const presupuestoPrueba =
+[{
+    "id": 1,
+    "nombre": "Presupuesto de Prueba",
+    "categorias":[
+        {
+            "nombre":"Categoria Prueba2",
+            "tareas":[
+            {
+                "id":3,
+                "nombre":"Cielorraso",
+                "precio":200,
+                "unidad":"Mt2",
+                "peso":2,
+                "cantidad":5
+            },
+            {
+                "id":2,
+                "nombre":"Contrapiso",
+                "precio":180,
+                "unidad":"Mt2",
+                "peso":2,
+                "cantidad":3
+            },
+            {
+                "id":4,
+                "nombre":"Pintura",
+                "precio":300,
+                "unidad":"Mt2",
+                "peso":1,
+                "cantidad":7
+            }
+        ],
+        "subtotal":3640
+    },
+    {
+        "nombre":"Categoria Prueba3",
+        "tareas":[
+            {
+                "id":1,
+                "nombre":"Mamposteria",
+                "precio":100,
+                "unidad":"Mt2",
+                "peso":4,
+                "cantidad":5
+            },
+            {
+                "id":3,
+                "nombre":"Cielorraso",
+                "precio":200,
+                "unidad":"Mt2",
+                "peso":2,
+                "cantidad":3
+            },
+            {
+                "id":2,
+                "nombre":"Contrapiso",
+                "precio":180,
+                "unidad":"Mt2",
+                "peso":2,
+                "cantidad":7
+            }
+        ],
+        "subtotal":2360
+    }
+],
+"total":6000
+}]

@@ -1,20 +1,15 @@
-var tareasArray = [];
+const arrayFrom = (json, clase, key) =>  Array.from( getLocal(key) || json, item => new clase(item) )
 
-jasonTareas.forEach(item => tareasArray.push(new Tareas(item)));
+const sinoSosHacete = (array, clase) => array instanceof clase ? array : arrayFrom(array, clase)
 
-var presupuestoTest = new Presupuestos({id: 1, nombre: "Presupuesto de Prueba"})
+var tareasArray = arrayFrom(jasonTareas, Tareas, "tareas")
 
-presupuestoTest.pushCategoria("Categoria Prueba2")
+console.log(tareasArray)
 
-presupuestoTest.addTarea(0,tareasArray[2],5)
-presupuestoTest.addTarea(0,tareasArray[1],3)
-presupuestoTest.addTarea(0,tareasArray[3],7)
+var presupuestos = arrayFrom(presupuestoPrueba, Presupuestos, "presupuestos")
 
-presupuestoTest.pushCategoria("Categoria Prueba3")
+console.log(presupuestos)
 
-presupuestoTest.addTarea(1,tareasArray[0],5)
-presupuestoTest.addTarea(1,tareasArray[2],3)
-presupuestoTest.addTarea(1,tareasArray[1],7)
+//setLocal("tareas", tareasArray)
 
-presupuestoTest.calcTotal()
-console.log(presupuestoTest.total)
+

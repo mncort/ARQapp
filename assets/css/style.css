@@ -57,4 +57,38 @@ i {
   cursor: pointer;
 }
 
+table {
+  vertical-align: middle;
+}
+table td {
+  text-align: center;
+}
+table td:nth-child(2) {
+  text-align: start;
+}
+table th {
+  text-align: center;
+}
+table th:nth-child(2) {
+  text-align: start;
+}
+
+.boton-container {
+  text-align: end;
+}
+
+#tarea-agregar-categoria {
+  background-color: #e7f1ff;
+  font-size: 1rem;
+  padding: 0.8rem;
+}
+#tarea-agregar-categoria input {
+  max-width: 50%;
+}
+
+#valorTotal {
+  color: darkgreen;
+  font-size: 1.2rem;
+}
+
 /*# sourceMappingURL=style.css.map */

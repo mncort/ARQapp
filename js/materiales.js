@@ -1,4 +1,4 @@
-const jasonMateriales = [
+const jasonTareas = [
     {
         "id": 1,
         "nombre": "Mamposteria",
@@ -28,11 +28,3 @@ const jasonMateriales = [
         "peso": 2
     }
 ];
-
-/*
-    leo materiales del localstorage si es vacio escribo array sino uso el array
-*/
-
-let listado = leerLocalStorage("listado").length != 0 ? leerLocalStorage("listado") : jasonMateriales && escribirLocalStorage("listado", jasonMateriales)
-
-console.log(listado)

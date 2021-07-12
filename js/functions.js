@@ -34,16 +34,16 @@ function dibujarTareas(){
     `
 }
 
-function dibujarPresupuestos(){
+function dibujarPresupuestos(indexPresupuesto){
 
     let title = document.getElementById("modulo-title")
-    title.innerText = "Presupuestos"
+    title.innerText = presupuestos[indexPresupuesto].nombre
 
     let content = document.getElementById("modulo-content")
 
     content.innerHTML =`
             <div class="accordion" >
-            ${presupuestoTest.categorias.map( (item, index) =>`
+            ${presupuestos[indexPresupuesto].categorias.map( (item, index) =>`
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingOne${index}">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne${index}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne${index}">
@@ -75,56 +75,70 @@ function dibujarPresupuestos(){
                                     <td>${tarea.unidad}</td>
                                     <td>${tarea.peso}</td>
                                     <td id="cantidad-${index + `-` + indexTarea}" class="cantidad-item">
-                                        ${dibujarCantidad(index, indexTarea, tarea.cantidad)}
+                                        ${dibujarCantidad(indexPresupuesto, index, indexTarea, tarea.cantidad)}
                                     </td>
                                     <td>${tarea.precio}</td>
-                                    <td id="acc-${index}-${indexTarea}"></td>
+                                    <td id="acc-${index}-${indexTarea}">
+                                        <i class="icon ion-md-trash lead" onclick=""></i>
+                                    </td>
                                 </tr>
                             `).join("")}
                         </tbody>
                     </table>
-                    <i class="icon ion-md-add px-2 py-1 rounded-1 btn-primary" onclick="addTareaTabla(${index})"></i>
+                    <i class="icon ion-md-add px-2 py-1 rounded-1 btn-primary" onclick="addTareaTabla(${indexPresupuesto},${index})"></i>
                 </div>
               </div>
             </div>`).join("")}
           </div> 
             `
 }
+function setLocal(key, objeto){
+    localStorage.setItem(key,JSON.stringify(objeto))
+}
 
+function getLocal(key){
+    let item = localStorage.getItem(key)
+    return item == "undefined" ? null : JSON.parse(item)
+}
 
-function cantidad(index, indexTarea, cantidad = 1){
+function escribirLocal(key,objeto){
+    let objetoLocal = getLocal(key)
+    !objetoLocal && setLocal(key,objeto)
+}
 
-    let tarea = presupuestoTest.categorias[index].tareas[indexTarea]
+function cantidad(indexPresupuesto, index, indexTarea, cantidad = 1){
 
-    presupuestoTest.addTarea(index, tarea, cantidad)
+    let tarea = presupuestos[indexPresupuesto].categorias[index].tareas[indexTarea]
+
+    presupuestos[indexPresupuesto].addTarea(index, tarea, cantidad)
 
     let element = document.getElementById('cantidad-'+ index + '-' + indexTarea)
 
-    tarea = presupuestoTest.categorias[index].tareas[indexTarea]
+    tarea = presupuestos[indexPresupuesto].categorias[index].tareas[indexTarea]
 
-    element.innerHTML = dibujarCantidad(index, indexTarea, tarea.cantidad)
+    element.innerHTML = dibujarCantidad(indexPresupuesto, index, indexTarea, tarea.cantidad)
 
-    actSubtotal(index)
+    actSubtotal(indexPresupuesto, index)
 
 }
 
-function actSubtotal(index){
+function actSubtotal(indexPresupuesto, index){
     let element = document.getElementById(`cat-subtotal-${index}`)
 
-    let subtotal = presupuestoTest.categorias[index].subtotal
+    let subtotal = presupuestos[indexPresupuesto].categorias[index].subtotal
 
     element.innerHTML = `$ ${subtotal}`
 
 }
 
 
-function dibujarCantidad(index, indexTarea, cantidad){
-    return `<i class="icon ion-md-remove" onclick='cantidad(${index},${indexTarea},-1)'></i>
+function dibujarCantidad(indexPresupuesto, index, indexTarea, cantidad){
+    return `<i class="icon ion-md-remove" onclick='cantidad(${indexPresupuesto},${index},${indexTarea},-1)'></i>
         ${cantidad}
-    <i class="icon ion-md-add" onclick='cantidad(${index},${indexTarea})'></i>`
+    <i class="icon ion-md-add" onclick='cantidad(${indexPresupuesto},${index},${indexTarea})'></i>`
 }
 
-function addTareaTabla(index){
+/*function addTareaTabla(indexPresupuesto,index){
 
     let element = document.getElementById(`tbody-categoria-${index}`)
 
@@ -144,13 +158,13 @@ function addTareaTabla(index){
         </td>
         <td>-</td>
         <td id="acc-${index}">
-            <i class="icon ion-md-checkmark lead" onclick="pushTarea(${index})"></i>        
+            <i class="icon ion-md-checkmark lead" onclick="pushTarea(${indexPresupuesto},${index})"></i>        
         </td>
     `
     element.appendChild(registro)
     
-}
-
+}*/
+/*
 function crearSelectTareas(index){
     let divpadre = document.createElement('div')
     let selecttareas = document.createElement('select')
@@ -167,52 +181,34 @@ function crearSelectTareas(index){
 
     return divpadre.innerHTML
 
-}
-function pushTarea(index){
+}*/
+function pushTarea(indexPresupuesto, index){
     let idTarea = document.getElementById(`select-tareas-${index}`).value
 
     tarea = tareasArray.find(item => item.id == idTarea)
 
     let cantidad = parseInt(document.getElementById(`cantidad-${index}`).value)
 
-    !isNaN(cantidad) && presupuestoTest.addTarea(index, tarea, cantidad)
+    !isNaN(cantidad) && presupuestos[indexPresupuesto].addTarea(index, tarea, cantidad)
 
-    dibujarTablaTareas(index)
-    actSubtotal(index)
+    dibujarTablaTareas(indexPresupuesto, index)
+    actSubtotal(indexPresupuesto, index)
 }
 
-function dibujarTablaTareas(index){
+function dibujarTablaTareas(indexPresupuesto, index){
     let element = document.getElementById(`tbody-categoria-${index}`)
 
     element.innerHTML = `
-    ${presupuestoTest.categorias[index].tareas.map( (tarea, indexTarea) => `
+    ${presupuestos[indexPresupuesto].categorias[index].tareas.map( (tarea, indexTarea) => `
         <tr id="tarea-${index + `-` + indexTarea}">
             <td>${tarea.id}</td>
             <td>${tarea.nombre}</td>
             <td>${tarea.unidad}</td>
             <td>${tarea.peso}</td>
             <td id="cantidad-${index + `-` + indexTarea}" class="cantidad-item">
-                ${dibujarCantidad(index, indexTarea, tarea.cantidad)}
+                ${dibujarCantidad(indexPresupuesto, index, indexTarea, tarea.cantidad)}
             </td>
             <td>${tarea.precio}</td>
-            <td id="acc-${index}-${indexTarea}"></td>
+            <td id="acc-${index}-${indexTarea}"><i class="icon ion-md-trash lead"></i></td>
         </tr>`).join("")}`
 }
-
-
-
-/*
-function dibujarRenglon(){
-    <tr id="tarea-${indexTarea}">
-        <td>${tarea.id}</td>
-        <td>${tarea.nombre}</td>
-        <td>${tarea.unidad}</td>
-        <td>${tarea.peso}</td>
-        <td pepito="PadreTareas" id="cantidad-${index+ `-` +tarea.id}">
-            <i class="icon ion-md-remove" onclick='presupuestoTest.categorias[${index}].addTareaIndex(${indexTarea},-1)'></i>
-            ${tarea.cantidad}
-            <i class="icon ion-md-add" onclick='presupuestoTest.categorias[${index}].addTareaIndex(${indexTarea})'></i>
-        </td>
-        <td>${tarea.precio}</td>
-    </tr>
-}*/
