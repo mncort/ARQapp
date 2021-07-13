@@ -95,7 +95,7 @@ function inputTareas(){
     `
     element.appendChild(registro)
 }
-function dibujarPresupuestos2(indexPresupuesto){
+function dibujarPresupuesto(indexPresupuesto){
     let title = document.getElementById("modulo-title")
     let h2 = document.createElement("h2")
     let span = document.createElement("span")
@@ -141,7 +141,7 @@ function addCategoria(indexPresupuesto){
         
         <span>
             <i class="icon ion-md-checkmark lead me-3" onclick="pushCategoria(${indexPresupuesto})"></i>
-            <i class="icon ion-md-close lead me-3" onclick="dibujarPresupuestos2(${indexPresupuesto})"></i>
+            <i class="icon ion-md-close lead me-3" onclick="dibujarPresupuesto(${indexPresupuesto})"></i>
         <span>
     `
     element.prepend(divCat)
@@ -150,10 +150,10 @@ function pushCategoria(indexPresupuesto){
 
     let catNombre = document.getElementById("push-nombre-categoria").value
     presupuestos[indexPresupuesto].pushCategoria(catNombre)
-    dibujarPresupuestos2(indexPresupuesto)
+    dibujarPresupuesto(indexPresupuesto)
 }
 function eliminarCatTabla(indexCat){
-    dibujarPresupuestos2(indexCat)
+    dibujarPresupuesto(indexCat)
 }
 function setLocal(key, objeto){
     localStorage.setItem(key,JSON.stringify(objeto))
@@ -215,3 +215,82 @@ function pushTarea(indexPresupuesto, index){
     !isNaN(cantidad) && presupuestos[indexPresupuesto].addTarea(index, tarea, cantidad)
     presupuestos[indexPresupuesto].actualizarCategoria(index)
 }
+function listadoPresupuestos(){
+    let title = document.getElementById("modulo-title")
+    title.innerHTML = "<h2>Presupuestos</h2>"
+    let content = document.getElementById("modulo-content")
+
+    content.innerHTML=`
+    <div class="boton-container mb-3">
+        <i name="nuevoPresupuesto"
+            class="icon ion-md-add px-2 py-1 rounded-1 btn-primary" 
+            onclick="manejoPresupuestos(event)"> 
+                Nuevo
+        </i>
+    </div>
+    <div class="card">
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Accion</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-presupuestos">
+                ${presupuestos.map((presupuesto, index) =>`
+                    <tr>
+                        <td>${presupuesto.id}</td>
+                        <td>${presupuesto.nombre}</td>
+                        <td>${presupuesto.total}</td>
+                        <td>
+                            <i class="icon ion-md-eye lead" onclick="dibujarPresupuesto(${index})"></i>
+                        </td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    </div>    
+    `
+}
+function manejoPresupuestos(evento){
+    let que = evento.target.getAttribute("name")
+    const  acciones = {
+        "nuevoPresupuesto": () => inputsPresupuestos(),
+        "pushPresupuesto": () => pushPresupuesto()
+    }[que]()
+
+    !["nuevoPresupuesto"].includes(que) && listadoPresupuestos();
+}
+
+function inputsPresupuestos(){
+    let element = document.getElementById("tabla-presupuestos")
+    let tr = document.createElement("tr")
+    tr.innerHTML = `
+        <td>
+            <input id="id" type="number" class="form-control form-control-sm" placeholder="ID">
+        </td>
+        <td>
+            <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre">
+        </td>
+        <td>-</td>
+        <td>
+            <i name="pushPresupuesto"class="icon ion-md-checkmark lead" onclick="manejoPresupuestos(event)"></i>   
+        </td>
+    `
+    element.appendChild(tr)
+}
+function pushPresupuesto(){
+    let element = document.getElementById("tabla-presupuestos")
+    let id = parseInt(element.querySelector("#id").value)
+    let nombre = element.querySelector("#nombre").value
+
+    presupuestos.push(new Presupuestos({id, nombre}))
+
+    //presupuestos.push(new Presupuestos())
+}
+
+
+
+
