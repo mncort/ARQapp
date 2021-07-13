@@ -4,12 +4,7 @@ const sinoSosHacete = (array, clase) => array instanceof clase ? array : arrayFr
 
 var tareasArray = arrayFrom(jasonTareas, Tareas, "tareas")
 
-console.log(tareasArray)
-
 var presupuestos = arrayFrom(presupuestoPrueba, Presupuestos, "presupuestos")
 
-console.log(presupuestos)
-
-//setLocal("tareas", tareasArray)
 
 

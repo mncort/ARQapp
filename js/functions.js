@@ -191,7 +191,7 @@ function addTareaTabla(indexPresupuesto,index){
     `
     element.appendChild(registro)
 }
-
+//Select que lista las tareas de tareasArray
 function crearSelectTareas(index){
     let divpadre = document.createElement('div')
     let selecttareas = document.createElement('select')
@@ -287,8 +287,6 @@ function pushPresupuesto(){
     let nombre = element.querySelector("#nombre").value
 
     presupuestos.push(new Presupuestos({id, nombre}))
-
-    //presupuestos.push(new Presupuestos())
 }
 
 
