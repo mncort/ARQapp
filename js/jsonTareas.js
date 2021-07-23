@@ -1,30 +1,30 @@
-[
+const jasonTareas = [
     {
         "id": 1,
         "nombre": "Mamposteria",
         "precio": 100,
-        "unidad": "hs",
-        "peso": 8
+        "unidad": "Mt2",
+        "peso": 4
     },
     { 
         "id": 2,
         "nombre": "Contrapiso",
         "precio": 180,
-        "unidad": "hs",
-        "peso": 4
+        "unidad": "Mt2",
+        "peso": 2
     },
     { 
         "id": 3,
-        "nombre": "Cielo Raso",
+        "nombre": "Cielorraso",
         "precio": 200,
-        "unidad": "hs",
-        "peso": 3
+        "unidad": "Mt2",
+        "peso": 2
     },
     { 
-        "id": 3,
+        "id": 4,
         "nombre": "Pintura",
         "precio": 300,
-        "unidad": "hs",
-        "peso": 2
+        "unidad": "Mt2",
+        "peso": 1
     }
-]
+];

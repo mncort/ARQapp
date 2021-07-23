@@ -30,28 +30,15 @@ class Categorias{
         this.tareas = tareas
         this.subtotal = subtotal
     }
-    /*
-    addTarea(tarea,cantidad = 1){
-
-        let index = this.tareas.findIndex(item => item.id === tarea.id)
-
-        index == -1 ?         
-        this.tareas.push({...new Tareas(tarea), cantidad: cantidad}) :
-        this.tareas[index].cantidad += cantidad
-      
-        this.calcSubtotal()
-    }
-    calcSubtotal(){
-        this.subtotal = this.tareas.reduce((acum, item) => acum + (item.precio * item.cantidad), 0)
-    }*/
 }
 
 class Presupuestos{
-    constructor({id,nombre,categorias = [], total = 0}){
+    constructor({id,nombre,categorias = [], total = 0, cliente = ""}){
         this.id = parseInt(id)
         this.nombre = nombre
         this.categorias = sinoSosHacete(categorias, Categorias)
         this.total = total
+        this.cliente = cliente
     }
     pushCategorias(categorias){
         categorias.forEach(item => this.categorias.push(new Categorias(item)))
@@ -163,9 +150,27 @@ class Presupuestos{
         document.getElementById("valorTotal").innerHTML = `$ ${this.total}`
     }
 }
-/*
-buscarTarea(){
-let tarea = this.categorias.find(categoria => categoria.nombre == nombreCategoria)
-                    .find(tarea => tarea.id == idTarea)
+
+class Clientes{
+    constructor({id, nombre, mail = "", telefono, direccion = ""}){
+        this.id = parseInt(id)
+        this.nombre = nombre
+        this.mail = mail
+        this.telefono = telefono
+        this.direccion = direccion
+    }
+    dibujarRenglon(){
+        return ` 
+                <tr id="cliente-${this.id}">
+                    <td>${this.id}</td>
+                    <td>${this.nombre}</td>
+                    <td>${this.mail}</td>
+                    <td>${this.telefono}</td>
+                    <td>${this.direccion}</td>
+                    <td>
+                        <i id="delete-${this.id}" onclick="accionCliente(event)" name="trash" class="icon ion-md-trash lead"></i>
+                    </td>
+                </tr>
+            `
+    }
 }
-*/
