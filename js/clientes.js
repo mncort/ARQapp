@@ -75,7 +75,7 @@ function inputsCliente(){
         </tr>
     `).hide()
     
-    $('#tabla-clientes>tbody').append(inputs.fadeIn(100))
+    $('#tabla-clientes>tbody').append(inputs.fadeIn(200).fadeOut(200).fadeIn(200))
 }
 function newCliente(){
     const inputs = $('#fila-inputs>td>input')
