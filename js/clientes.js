@@ -11,12 +11,12 @@ function dibujarClientes(){
                 <table id="tabla-clientes" class="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Mail</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Accion</th>
+                            <th scope="col" class="col-1">ID</th>
+                            <th scope="col" class="col-3">Nombre</th>
+                            <th scope="col" class="col-2">Mail</th>
+                            <th scope="col" class="col-2">Telefono</th>
+                            <th scope="col" class="col-3">Direccion</th>
+                            <th scope="col" class="col-1">Accion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,11 +40,11 @@ function botonAgregarCliente(){
             </div>`
 }
 function accionCliente(evento){
-    let que = evento.target.getAttribute("name")
+    const que = evento.target.getAttribute("name")
     const  acciones = {
-        "addCliente"      : () => inputsCliente(),
+        "addCliente" : () => inputsCliente(),
         "trash"      : () => deleteCliente(evento),
-        "newCliente"      : () => newCliente()
+        "newCliente" : () => newCliente()
     }[que]()
 
     !["addCliente"].includes(que) && dibujarClientes()
@@ -52,7 +52,7 @@ function accionCliente(evento){
 }
 
 function inputsCliente(){
-    $('#tabla-clientes>tbody').append(`
+    const inputs = $(`
         <tr id="fila-inputs">
             <td>
                 <input name="id" placeholder="ID" type="number" class="form-control form-control-sm">
@@ -73,18 +73,18 @@ function inputsCliente(){
                 <i name="newCliente"class="icon ion-md-checkmark lead" onclick="accionCliente(event)"></i>
             </td>
         </tr>
-    `)
+    `).hide()
+    
+    $('#tabla-clientes>tbody').append(inputs.fadeIn(100))
 }
 function newCliente(){
-    let inputs = $('#fila-inputs>td>input')
+    const inputs = $('#fila-inputs>td>input')
     let objetoCliente = {}
     inputs.each((index, item) => objetoCliente[item.name] = item.value)
     clientesArray.push(new Clientes (objetoCliente))
 }
 
 function deleteCliente(evento){
-    let id = evento.target.getAttribute("id").split("-")[1]
-
-    console.log(id)
+    const id = evento.target.getAttribute("id").split("-")[1]
     clientesArray = clientesArray.filter( cliente => cliente.id != id)
 }
