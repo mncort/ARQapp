@@ -1,4 +1,4 @@
-const jasonTareas = [
+[
     {
         "id": 1,
         "nombre": "Mamposteria",
@@ -27,4 +27,4 @@ const jasonTareas = [
         "unidad": "Mt2",
         "peso": 1
     }
-];
+]

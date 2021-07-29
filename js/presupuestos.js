@@ -1,3 +1,12 @@
+function levantarPresupuestos(){
+    fetch(`./assets/data/presupuestoPrueba.json`)
+    .then( response => response.json() )
+    .then( response => {
+        presupuestos = arrayFrom(response, Presupuestos, "presupuestos")
+        listadoPresupuestos()
+    })
+}
+
 function listadoPresupuestos(){
     let title = document.getElementById("modulo-title")
     title.innerHTML = "<h2>Presupuestos</h2>"

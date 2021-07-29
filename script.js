@@ -2,11 +2,14 @@ const arrayFrom = (json, clase, key) =>  Array.from( getLocal(key) || json, item
 
 const sinoSosHacete = (array, clase) => array instanceof clase ? array : arrayFrom(array, clase)
 
+var tareasArray
+var presupuestos
+
 var clientesArray = arrayFrom(false, Clientes, "clientes")
 
-var tareasArray = arrayFrom(jasonTareas, Tareas, "tareas")
 
-var presupuestos = arrayFrom(presupuestoPrueba, Presupuestos, "presupuestos")
+
+
 
 
 

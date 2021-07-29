@@ -1,3 +1,12 @@
+function levantarTareas(){
+    fetch(`./assets/data/tareas.json`)
+        .then( response => response.json() )
+        .then( response => {
+            tareasArray = arrayFrom(response, Tareas, "tareas")
+            dibujarTareas()
+    })
+}
+
 function dibujarTareas(){
     let title = document.getElementById("modulo-title")
     title.innerHTML = "<h2>Tareas</h2>"
