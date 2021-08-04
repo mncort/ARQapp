@@ -6,7 +6,7 @@ class Tareas{
         this.unidad = unidad
         this.peso = parseInt(peso)
     }
-    titulosTabla(titulos){
+    /*titulosTabla(titulos){
         return `<tr>
             ${titulos.map( titulo => `<th scope="col">`+ titulo ).join("</th>")}
         </tr>`
@@ -21,7 +21,7 @@ class Tareas{
                     <td>${this.precio}</td>
                 </tr>
             `
-    }
+    }*/
 }
 
 class Categorias{
@@ -78,25 +78,25 @@ class Presupuestos{
     dibujarRenglonesTareas(indexCat){
         return this.categorias[indexCat].tareas.map( tarea => ` 
             <tr id="tarea-${indexCat + `-` + tarea.id}">
-                <td>${tarea.id}</td>
-                <td>${tarea.nombre}</td>
-                <td>${tarea.unidad}</td>
-                <td>${tarea.peso}</td>
-                <td class="cantidad-item">
+                <td class="col-1">${tarea.id}</td>
+                <td class="col-3">${tarea.nombre}</td>
+                <td class="col-1">${tarea.unidad}</td>
+                <td class="col-1">${tarea.peso}</td>
+                <td class="cantidad-item col-1" >
                     <i onclick="recibirOnclick(event)"name="-1" class="icon ion-md-remove"></i>
                     <span name="cantidad">${tarea.cantidad}</span>
                     <i onclick="recibirOnclick(event)" name="+1" class="icon ion-md-add"></i>
                 </td>
-                <td>${tarea.precio}</td>
-                <td class="columna-accion">
+                <td class="col-1">${tarea.precio}</td>
+                <td class="columna-accion col-1"" >
                     <i onclick="recibirOnclick(event)" name="trash" class="icon ion-md-trash lead"></i>
                 </td>
             </tr>
         `).join("")
     }
-    titulosTabla(titulos){
+    titulosTabla(titulos, clase){
         return `<tr>
-            ${titulos.map( titulo => `<th scope="col">`+ titulo ).join("</th>")}
+            ${titulos.map( titulo => `<th scope="col" class="col-`+ clase +`">`+ titulo ).join("</th>")}
         </tr>`
     }
     dibujarPresupuesto(){
@@ -125,7 +125,8 @@ class Presupuestos{
                 <table class="table table-sm">
                     <thead>
                         ${this.titulosTabla(
-                            ["ID", "Nombre", "Un", "Hs", "Cant", "Valor", "Accion"]
+                            ["ID", "Nombre", "Un", "Hs", "Cant", "Valor", "Accion"],
+                            ['1', '3', '1','1','1', '1','1'],
                         )}
                     </thead>
                     <tbody id="tbody-${indexCat}">
@@ -147,7 +148,7 @@ class Presupuestos{
         element.innerHTML = this.dibujarRenglonesTareas(indexCat)
         let eSubtotal = document.getElementById(`cat-subtotal-${indexCat}`)
         eSubtotal.innerHTML = `$ ${this.categorias[indexCat].subtotal}`
-        document.getElementById("valorTotal").innerHTML = `$ ${this.total}`
+        document.getElementById("valorTotal").innerHTML = `Total: $ ${this.total}`
     }
 }
 

@@ -24,10 +24,10 @@ function listadoPresupuestos(){
         <table class="table table-striped mb-0">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Accion</th>
+                    <th scope="col" class="col-1">ID</th>
+                    <th scope="col" class="col-4">Nombre</th>
+                    <th scope="col" class="col-1">Total</th>
+                    <th scope="col" class="col-1">Accion</th>
                 </tr>
             </thead>
             <tbody id="tabla-presupuestos">

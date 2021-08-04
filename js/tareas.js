@@ -1,9 +1,9 @@
-function levantarTareas(){
+async function levantarTareas(dibujar = true){
     fetch(`./assets/data/tareas.json`)
         .then( response => response.json() )
         .then( response => {
-            tareasArray = arrayFrom(response, Tareas, "tareas")
-            dibujarTareas()
+        tareasArray = arrayFrom(response, Tareas, "tareas")
+        dibujar && dibujarTareas()
     })
 }
 
@@ -19,12 +19,12 @@ function dibujarTareas(){
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Un</th>
-                        <th scope="col">Hs</th>
-                        <th scope="col">Valor Un.</th>
-                        <th scope="col">Accion</th>
+                        <th scope="col" class="col-1">ID</th>
+                        <th scope="col" class="col-3">Nombre</th>
+                        <th scope="col" class="col-1">Un</th>
+                        <th scope="col" class="col-1">Hs</th>
+                        <th scope="col" class="col-1">Valor Un.</th>
+                        <th scope="col" class="col-1">Accion</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-tareas">
@@ -75,7 +75,8 @@ function addTareaTareas(){
     let objetoTarea = {}
     arrayInput.forEach(input => objetoTarea[input.id] = input.value)
 
-    tareasArray.push(new Tareas(objetoTarea))
+    //valido que el objeto no este vacio o algun elemento vacio
+    !Object.keys(objetoTarea).find(key => objetoTarea[key] == "") && tareasArray.push(new Tareas(objetoTarea))
 }
 function inputTareas(){
     let element = document.getElementById(`tabla-tareas`)

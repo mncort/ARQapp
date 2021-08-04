@@ -1,4 +1,5 @@
-function dibujarPresupuesto(indexPresupuesto){
+async function dibujarPresupuesto(indexPresupuesto){
+    await levantarTareas(false)
     let title = document.getElementById("modulo-title")
     let h2 = document.createElement("h2")
     let span = document.createElement("span")
@@ -7,7 +8,7 @@ function dibujarPresupuesto(indexPresupuesto){
     h2.setAttribute("id", `${indexPresupuesto}`)
     h2.setAttribute("class", "AcaTaElIndex")
     h2.innerHTML = presupuestos[indexPresupuesto].nombre
-    span.innerHTML = `$ ${presupuestos[indexPresupuesto].total}`
+    span.innerHTML = `Total: $ ${presupuestos[indexPresupuesto].total}`
     title.appendChild(h2)
     title.appendChild(span)
     document.getElementById("modulo-content").innerHTML = presupuestos[indexPresupuesto].dibujarPresupuesto()
