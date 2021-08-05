@@ -1,5 +1,11 @@
+/* En este Archivo escribo todo lo referido a la vista individual de cada presupuesto
+tambien hay algunas cosas que estan en los metodos de la clase de presupuesto.
+    Por ejemplo lo que es el armado del html lo hace desde los metodos de la clase  */
+
 async function dibujarPresupuesto(indexPresupuesto){
-    await levantarTareas(false)
+    await levantarTareas(false) //levanto las tareas disponibles, las cuales utilizo para escribir cada vez que quiero agregar una tarea
+    
+    // Se generan las etiquetas para la insercion del titulo y valor total 
     let title = document.getElementById("modulo-title")
     let h2 = document.createElement("h2")
     let span = document.createElement("span")
@@ -11,6 +17,8 @@ async function dibujarPresupuesto(indexPresupuesto){
     span.innerHTML = `Total: $ ${presupuestos[indexPresupuesto].total}`
     title.appendChild(h2)
     title.appendChild(span)
+
+    //Dibujo el contenido del presupuesto
     document.getElementById("modulo-content").innerHTML = presupuestos[indexPresupuesto].dibujarPresupuesto()
 }
 function recibirOnclick(evento){
@@ -59,13 +67,7 @@ function pushCategoria(indexPresupuesto){
 function eliminarCatTabla(indexCat){
     dibujarPresupuesto(indexCat)
 }
-function setLocal(key, objeto){
-    localStorage.setItem(key,JSON.stringify(objeto))
-}
-function getLocal(key){
-    let item = localStorage.getItem(key)
-    return item == "undefined" ? null : JSON.parse(item)
-}
+
 /*function escribirLocal(key,objeto){
     let objetoLocal = getLocal(key)
     !objetoLocal && setLocal(key,objeto)
