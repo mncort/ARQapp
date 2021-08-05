@@ -6,22 +6,6 @@ class Tareas{
         this.unidad = unidad
         this.peso = parseInt(peso)
     }
-    /*titulosTabla(titulos){
-        return `<tr>
-            ${titulos.map( titulo => `<th scope="col">`+ titulo ).join("</th>")}
-        </tr>`
-    }
-    dibujarRenglonesTareas(){
-        return ` 
-                <tr id="tarea-${this.id}">
-                    <td>${this.id}</td>
-                    <td>${this.nombre}</td>
-                    <td>${this.unidad}</td>
-                    <td>${this.peso}</td>
-                    <td>${this.precio}</td>
-                </tr>
-            `
-    }*/
 }
 
 class Categorias{
