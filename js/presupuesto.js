@@ -116,7 +116,7 @@ function crearSelectTareas(index){
 
 function pushTarea(indexPresupuesto, index){
     let idTarea = document.getElementById(`select-tareas-${index}`).value
-    tarea = tareasArray.find(item => item.id == idTarea)
+    tarea = tareasArray?.find(item => item.id == idTarea)
     let cantidad = parseInt(document.getElementById(`cantidad-${index}`).value)
     !isNaN(cantidad) && presupuestos[indexPresupuesto].addTarea(index, tarea, cantidad)
     presupuestos[indexPresupuesto].actualizarCategoria(index)
